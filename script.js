@@ -31,12 +31,19 @@ function showOutlineCard(character) {
     ctx.font = '80px Arial'; // Set font size and style
     ctx.fillText(character, 20, 120); // Draw character at specified position
 
+    canvas.removeEventListener('touchstart', startDrawingTouch);
+    canvas.removeEventListener('touchmove', drawTouch);
+    canvas.removeEventListener('touchend', stopDrawingTouch);
+
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('touchstart', startDrawingTouch);
+    canvas.addEventListener('touchmove', drawTouch);
+    canvas.addEventListener('touchend', stopDrawingTouch);
 }
 
-// Function to start drawing
+// Function to start drawing with mouse
 function startDrawing(event) {
     isDrawing = true;
     const canvas = document.getElementById('stroke-canvas');
@@ -45,7 +52,7 @@ function startDrawing(event) {
     ctx.moveTo(event.offsetX, event.offsetY);
 }
 
-// Function to draw stroke
+// Function to draw with mouse
 function draw(event) {
     if (!isDrawing) return;
     const canvas = document.getElementById('stroke-canvas');
@@ -54,8 +61,33 @@ function draw(event) {
     ctx.stroke();
 }
 
-// Function to stop drawing
+// Function to stop drawing with mouse
 function stopDrawing() {
+    isDrawing = false;
+}
+
+// Function to start drawing with touch
+function startDrawingTouch(event) {
+    event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+    isDrawing = true;
+    const canvas = document.getElementById('stroke-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(event.touches[0].clientX - canvas.getBoundingClientRect().left, event.touches[0].clientY - canvas.getBoundingClientRect().top);
+}
+
+// Function to draw with touch
+function drawTouch(event) {
+    event.preventDefault(); // Prevent default touch behavior (e.g., scrolling)
+    if (!isDrawing) return;
+    const canvas = document.getElementById('stroke-canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.lineTo(event.touches[0].clientX - canvas.getBoundingClientRect().left, event.touches[0].clientY - canvas.getBoundingClientRect().top);
+    ctx.stroke();
+}
+
+// Function to stop drawing with touch
+function stopDrawingTouch() {
     isDrawing = false;
 }
 
