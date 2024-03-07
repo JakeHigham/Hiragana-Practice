@@ -1,0 +1,21 @@
+/* Add your CSS styles here */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.character-display {
+    margin-bottom: 30px;
+}
+
+.stroke-order-practice {
+    margin-bottom: 30px;
+}
+
+#stroke-canvas {
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: crosshair;
+}
