@@ -38,9 +38,9 @@ function showOutlineCard(character) {
     canvas.addEventListener('mousedown', startDrawing);
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
-    canvas.addEventListener('touchstart', startDrawingTouch);
-    canvas.addEventListener('touchmove', drawTouch);
-    canvas.addEventListener('touchend', stopDrawingTouch);
+    canvas.addEventListener('touchstart', startDrawingTouch, {passive: false});
+    canvas.addEventListener('touchmove', drawTouch, {passive: false});
+    canvas.addEventListener('touchend', stopDrawingTouch, {passive: false});
 }
 
 // Function to start drawing with mouse
@@ -72,8 +72,11 @@ function startDrawingTouch(event) {
     isDrawing = true;
     const canvas = document.getElementById('stroke-canvas');
     const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+    const touchX = event.touches[0].clientX - rect.left;
+    const touchY = event.touches[0].clientY - rect.top;
     ctx.beginPath();
-    ctx.moveTo(event.touches[0].clientX - canvas.getBoundingClientRect().left, event.touches[0].clientY - canvas.getBoundingClientRect().top);
+    ctx.moveTo(touchX, touchY);
 }
 
 // Function to draw with touch
@@ -82,7 +85,10 @@ function drawTouch(event) {
     if (!isDrawing) return;
     const canvas = document.getElementById('stroke-canvas');
     const ctx = canvas.getContext('2d');
-    ctx.lineTo(event.touches[0].clientX - canvas.getBoundingClientRect().left, event.touches[0].clientY - canvas.getBoundingClientRect().top);
+    const rect = canvas.getBoundingClientRect();
+    const touchX = event.touches[0].clientX - rect.left;
+    const touchY = event.touches[0].clientY - rect.top;
+    ctx.lineTo(touchX, touchY);
     ctx.stroke();
 }
 
