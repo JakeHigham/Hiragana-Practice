@@ -27,7 +27,7 @@ This is a simple web app for practicing stroke order of Japanese characters (Hir
 
 ## Contributing
 
-Contributions are welcome! If you'd like to contribute to this project, please reach out to me through email at kacobhcvn65@gmail.com
+Contributions are welcome! If you'd like to contribute to this project, please reach out to me through email at jacobhcvn65@gmail.com
 
 ## License
 
