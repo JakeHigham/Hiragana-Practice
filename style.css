@@ -10,12 +10,25 @@
     margin-bottom: 30px;
 }
 
-.stroke-order-practice {
-    margin-bottom: 30px;
+.character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Adjust grid layout */
+    grid-gap: 10px;
+}
+
+.character {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.character:hover {
+    transform: scale(1.05);
 }
 
 #stroke-canvas {
     border: 1px solid #000;
-    background-color: #fff;
-    cursor: crosshair;
 }
